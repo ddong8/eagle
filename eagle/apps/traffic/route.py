@@ -12,11 +12,25 @@ from eagle.apps.traffic import controller
 
 
 def add_routes(api):
-    api.add_route(controller.CityView.as_view(), '/city')
-    api.add_route(controller.LineView.as_view(), '/line')
+    """
+    Add route
+    :param api: Sanic object
+    :return: None
+    """
+    api.add_route(controller.CityCollection.as_view(), '/cities')
+    api.add_route(controller.CityItem.as_view(), '/city/<rid>')
+    api.add_route(controller.LineCollection.as_view(), '/lines')
+    api.add_route(controller.LineItem.as_view(), '/line/<rid>')
+    api.add_route(controller.RegionCollection.as_view(), '/regions')
+    api.add_route(controller.RegionItem.as_view(), '/region/<rid>')
+    api.add_route(controller.ProvinceCollection.as_view(), '/provinces')
+    api.add_route(controller.ProvinceItem.as_view(), '/province/<rid>')
 
-    @api.route("/index")
-    async def test(request):
-        result = await request.app.db.fetch('select * from city')
-        print(result)
-        return response.json({"test": True})
+    @api.route("/")
+    async def index(request):
+        """
+        index url
+        :param request: Sanic request.
+        :return: html
+        """
+        return response.html(body="welcome come to api service!", status=200)
