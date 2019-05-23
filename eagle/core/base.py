@@ -9,6 +9,8 @@
 from sanic.response import json
 from sanic.views import HTTPMethodView
 
+from eagle.core import curd
+
 
 def records_to_json(records):
     """
@@ -31,19 +33,16 @@ class CollectionView(HTTPMethodView):
     TABLE_NAME = None
 
     async def get(self, request, *args, **kwargs):
-        sql = "SELECT * FROM %s" % self.TABLE_NAME
+        sql = curd.get_s_sql(self.TABLE_NAME, keys=None, conditions=None)
         records = await request.app.db.fetch(sql)
         results = records_to_json(records)
         return json(results)
 
     async def post(self, request, *args, **kwargs):
         data = request.json
-        if data:
-            titles = ", ".join(tuple(data.keys()))
-            values = str(tuple(data.values()))
-            sql = "INSERT INTO %s (%s) VALUES %s" % (self.TABLE_NAME, titles, values)
-            await request.app.db.execute(sql)
-            return json(data)
+        sql = curd.get_c_sql(self.TABLE_NAME, data)
+        await request.app.db.execute(sql)
+        return json(data)
 
 
 class ItemView(HTTPMethodView):
@@ -54,33 +53,24 @@ class ItemView(HTTPMethodView):
     TABLE_NAME = None
 
     async def get(self, request, *args, **kwargs):
-        sql = "SELECT * FROM %s WHERE %s = '%s'" % (self.TABLE_NAME, self.PK_KEY, kwargs['rid'])
+        sql = curd.get_s_sql(self.TABLE_NAME, keys=None, conditions={self.PK_KEY: kwargs['rid']})
         records = await request.app.db.fetch(sql)
         results = records_to_json(records)
         return json(results)
 
     async def patch(self, request, *args, **kwargs):
         data = request.json
-        if data:
-            titles = ", ".join(tuple(data.keys()))
-            values = str(tuple(data.values()))
-            sql = "INSERT INTO %s (%s) VALUES %s" % (self.TABLE_NAME, titles, values)
-            await request.app.db.execute(sql)
-            return json(data)
+        sql = curd.get_u_sql(self.TABLE_NAME, data, conditions={self.PK_KEY: kwargs['rid']})
+        await request.app.db.execute(sql)
+        return json(data)
 
     async def put(self, request, *args, **kwargs):
         data = request.json
-        if data:
-            update_item = ""
-            for item in data:
-                update_item = "%s = %s," % (item, data[item])
-            update_item = update_item[:-1]
-            sql = "UPDATE %s SET %s WHERE  %s = %s" % (self.TABLE_NAME, update_item, self.PK_KEY, kwargs['rid'])
-            await request.app.db.execute(sql)
-            return json(data)
+        sql = curd.get_u_sql(self.TABLE_NAME, data, conditions={self.PK_KEY: kwargs['rid']})
+        await request.app.db.execute(sql)
+        return json(data)
 
     async def delete(self, request, *args, **kwargs):
-        sql = "DELETE * FROM %s WHERE %s = '%s'" % (self.TABLE_NAME, self.PK_KEY, kwargs['rid'])
-        records = await request.app.db.fetch(sql)
-        results = records_to_json(records)
-        return json(results)
+        sql = curd.get_d_sql(self.TABLE_NAME, conditions={self.PK_KEY: kwargs['rid']})
+        await request.app.db.execute(sql)
+        return json({'count': 1, 'rid': kwargs['rid']})

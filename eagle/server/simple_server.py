@@ -6,7 +6,7 @@
 # Do have a faith in what you're doing.
 # Make your life a story worth telling.
 
-from eagle.server.base_application import app
+from eagle.server.application import app
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8000, debug=True, access_log=True)
