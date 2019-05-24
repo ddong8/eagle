@@ -9,9 +9,9 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /var/log/eagle
 RUN chmod -R 777 /var/log/eagle
 
-WORKDIR /code/server
+ADD ./ /code
 
-ADD ./eagle/server /code/server
+WORKDIR /code
 
 RUN pip install -r /requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
 CMD ["python", "simple_server.py"]

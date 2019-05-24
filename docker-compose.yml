@@ -17,7 +17,7 @@ services:
     build: .
     restart: always
     volumes:
-      - ./eagle:/code
+      - ./:/code
     ports:
       - "80:8080"
     links:
