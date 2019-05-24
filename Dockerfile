@@ -13,5 +13,5 @@ WORKDIR /code/server
 
 ADD ./eagle/server /code/server
 
-RUN pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
+RUN pip install -r /requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
 CMD ["python", "simple_server.py"]
