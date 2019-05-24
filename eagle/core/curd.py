@@ -14,27 +14,27 @@ def safe_cast_2_str(val, default=''):
         return default
 
 
-def dict_2_str(fields_dict):
+def dict_2_str(fields):
     """
     convert dict to string format: key = 'value',key = 'value'
-    :param fields_dict:field dict
+    :param fields:field dict
     :return: string
     """
     tmp_list = []
-    for k, v in fields_dict.items():
+    for k, v in fields.items():
         tmp = "{}='{}'".format(str(k), safe_cast_2_str(v))
         tmp_list.append(' {} '.format(tmp))
     return ','.join(tmp_list)
 
 
-def dict_2_str_and(fields_dict):
+def dict_2_str_and(fields):
     """
     convert dict to string format: key = 'value' and key = 'value'
-    :param fields_dict:field dict
+    :param fields:field dict
     :return: string
     """
     tmp_list = []
-    for k, v in fields_dict.items():
+    for k, v in fields.items():
         tmp = "{}='{}'".format(str(k), safe_cast_2_str(v))
         tmp_list.append(' {} '.format(tmp))
     return ' AND '.join(tmp_list)
@@ -51,11 +51,11 @@ def tuple_2_str(fields):
     return ','.join(tmp1), ','.join(tmp2)
 
 
-def get_s_sql(table, keys, conditions, is_distinct=False):
+def get_s_sql(table, fields, conditions, is_distinct=False):
     """
     generate select sql statement.
     :param table: query table
-    :param keys: query keys
+    :param fields: query keys
     :param conditions: query conditions
     :param is_distinct: whether remove duplicate records.
     :return:string-->sql
@@ -64,8 +64,8 @@ def get_s_sql(table, keys, conditions, is_distinct=False):
         sql = 'SELECT DISTINCT '
     else:
         sql = 'SELECT '
-    if keys:
-        sql += ",".join(keys)
+    if fields:
+        sql += ",".join(fields)
     else:
         sql += '*'
     sql += ' FROM {} '.format(table)
