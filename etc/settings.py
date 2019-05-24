@@ -11,7 +11,7 @@ import multiprocessing
 workers = multiprocessing.cpu_count() * 2 + 1
 
 HOST = '0.0.0.0'
-PORT = 8000
+PORT = 8080
 
 DEBUG = True
 ACCESS_LOG = True
@@ -19,7 +19,7 @@ ACCESS_LOG = True
 WORKERS = workers
 
 DB_CFG = {
-    "host": "193.112.68.40",
+    "host": "db",
     "database": "ork",
     "user": "postgres",
     "password": "123456"
