@@ -19,7 +19,7 @@ ACCESS_LOG = True
 WORKERS = workers
 
 DB_CFG = {
-    "host": "db",
+    "host": "193.112.68.40",
     "database": "ork",
     "user": "postgres",
     "password": "123456"

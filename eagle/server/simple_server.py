@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 5/20/2019 2:34 PM
+# @Time    : 2019/5/24 16:02
 # @File    : simple_server.py
 # @Author  : donghaixing
 # Do have a faith in what you're doing.
@@ -8,7 +8,8 @@
 
 from eagle.server.application import app
 
-if __name__ == '__main__':
+
+def run():
     config = app.config
     app.run(host=config.HOST, port=config.PORT,
             debug=config.DEBUG, access_log=config.ACCESS_LOG, workers=config.WORKERS)

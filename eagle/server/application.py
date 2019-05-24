@@ -14,7 +14,7 @@ from sanic import Sanic
 from eagle.core.db import DB
 
 app = Sanic('eagle')
-app.config.from_pyfile('./settings.py')
+app.config.from_pyfile('./etc/settings.py')
 
 
 @app.listener('before_server_start')
