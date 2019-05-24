@@ -20,7 +20,7 @@ app.config.from_pyfile('./settings.py')
 @app.listener('before_server_start')
 async def initialize_app(application, loop):
     """
-    Register Route.
+    register route.
     :param application: Sanic object
     :param loop: Sanic async event loop
     :return: None
@@ -35,7 +35,7 @@ async def initialize_app(application, loop):
 @app.listener('before_server_start')
 async def initialize_db(application, loop):
     """
-    Init Postgresql DB.
+    initialize database.
     :param application: Sanic object
     :param loop: Sanic async event loop
     :return: None
