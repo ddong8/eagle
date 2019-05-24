@@ -6,6 +6,18 @@
 # Do have a faith in what you're doing.
 # Make your life a story worth telling.
 
+import multiprocessing
+
+workers = multiprocessing.cpu_count() * 2 + 1
+
+HOST = '0.0.0.0'
+PORT = 8000
+
+DEBUG = True
+ACCESS_LOG = True
+
+WORKERS = workers
+
 DB_CFG = {
     "host": "localhost",
     "database": "ork",

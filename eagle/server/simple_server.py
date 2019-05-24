@@ -9,4 +9,6 @@
 from eagle.server.application import app
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8000, debug=True, access_log=True)
+    config = app.config
+    app.run(host=config.HOST, port=config.PORT,
+            debug=config.DEBUG, access_log=config.ACCESS_LOG, workers=config.WORKERS)
