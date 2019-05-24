@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  db:
+    build: ./db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=ork
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d/
+    container_name: db
+    restart: always
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    restart: always
+    volumes:
+      - ./eagle:/code
+    ports:
+      - "80:8080"
+    links:
+      - db
+    depends_on:
+      - db
+    container_name: web
