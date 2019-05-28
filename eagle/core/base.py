@@ -23,7 +23,7 @@ def records_to_json(records):
         for record in records:
             data.append(dict(record))
     results = {'count': len(data), 'data': data}
-    return results
+    return json(results)
 
 
 class CollectionView(HTTPMethodView):
@@ -35,8 +35,7 @@ class CollectionView(HTTPMethodView):
     async def get(self, request, *args, **kwargs):
         sql = curd.get_r_sql(self.table_name, conditions=request.raw_args)
         records = await request.app.db.fetch(sql)
-        results = records_to_json(records)
-        return json(results)
+        return records_to_json(records)
 
     async def post(self, request, *args, **kwargs):
         data = request.json
@@ -55,8 +54,7 @@ class ItemView(HTTPMethodView):
     async def get(self, request, *args, **kwargs):
         sql = curd.get_r_sql(self.table_name, conditions={self.primary_key: kwargs['rid']})
         records = await request.app.db.fetch(sql)
-        results = records_to_json(records)
-        return json(results)
+        return records_to_json(records)
 
     async def patch(self, request, *args, **kwargs):
         data = request.json
