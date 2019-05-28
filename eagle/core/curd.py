@@ -60,10 +60,9 @@ def get_s_sql(table, fields, conditions, is_distinct=False):
     :param is_distinct: whether remove duplicate records.
     :return:string-->sql
     """
+    sql = 'SELECT '
     if is_distinct:
-        sql = 'SELECT DISTINCT '
-    else:
-        sql = 'SELECT '
+        sql += ' DISTINCT '
     if fields:
         sql += ",".join(fields)
     else:
