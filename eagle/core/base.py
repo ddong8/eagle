@@ -33,7 +33,7 @@ class CollectionView(HTTPMethodView):
     table_name = None
 
     async def get(self, request, *args, **kwargs):
-        sql = curd.get_s_sql(self.table_name, fields=None, conditions=None)
+        sql = curd.get_r_sql(self.table_name, fields=None, conditions=request.raw_args)
         records = await request.app.db.fetch(sql)
         results = records_to_json(records)
         return json(results)
@@ -53,7 +53,7 @@ class ItemView(HTTPMethodView):
     table_name = None
 
     async def get(self, request, *args, **kwargs):
-        sql = curd.get_s_sql(self.table_name, fields=None, conditions={self.primary_key: kwargs['rid']})
+        sql = curd.get_r_sql(self.table_name, fields=None, conditions={self.primary_key: kwargs['rid']})
         records = await request.app.db.fetch(sql)
         results = records_to_json(records)
         return json(results)

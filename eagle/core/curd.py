@@ -51,25 +51,16 @@ def tuple_2_str(fields):
     return ','.join(tmp1), ','.join(tmp2)
 
 
-def get_s_sql(table, fields, conditions, is_distinct=False):
+def get_r_sql(table, conditions):
     """
     generate select sql statement.
     :param table: query table
-    :param fields: query keys
     :param conditions: query conditions
-    :param is_distinct: whether remove duplicate records.
     :return:string-->sql
     """
-    sql = 'SELECT '
-    if is_distinct:
-        sql += ' DISTINCT '
-    if fields:
-        sql += ",".join(fields)
-    else:
-        sql += '*'
-    sql += ' FROM {} '.format(table)
+    sql = 'SELECT * FROM {}'.format(table)
     if conditions:
-        sql += ' WHERE {} '.format(dict_2_str_and(conditions))
+        sql += ' WHERE {}'.format(dict_2_str_and(conditions))
     return sql
 
 
@@ -84,7 +75,7 @@ def get_u_sql(table, fields, conditions):
     sql = 'UPDATE {} SET '.format(table)
     sql += dict_2_str(fields)
     if conditions:
-        sql += ' WHERE {} '.format(dict_2_str_and(conditions))
+        sql += ' WHERE {}'.format(dict_2_str_and(conditions))
     return sql
 
 
@@ -107,7 +98,7 @@ def get_d_sql(table, conditions):
     :param conditions: delete conditions.
     :return:string-->sql
     """
-    sql = 'DELETE FROM {} '.format(table)
+    sql = 'DELETE FROM {}'.format(table)
     if conditions:
-        sql += ' WHERE {} '.format(dict_2_str_and(conditions))
+        sql += ' WHERE {}'.format(dict_2_str_and(conditions))
     return sql
