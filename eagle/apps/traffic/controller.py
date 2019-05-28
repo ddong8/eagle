@@ -11,40 +11,40 @@ from eagle.core.base import ItemView
 
 
 class CityCollection(CollectionView):
-    TABLE_NAME = "city"
-    PK_KEY = 'uuid'
+    table_name = "city"
+    primary_key = 'uuid'
 
 
 class CityItem(ItemView):
-    TABLE_NAME = "city"
-    PK_KEY = 'uuid'
+    table_name = "city"
+    primary_key = 'uuid'
 
 
 class LineCollection(CollectionView):
-    TABLE_NAME = "line"
-    PK_KEY = 'uuid'
+    table_name = "line"
+    primary_key = 'uuid'
 
 
 class LineItem(ItemView):
-    TABLE_NAME = "line"
-    PK_KEY = 'uuid'
+    table_name = "line"
+    primary_key = 'uuid'
 
 
 class RegionCollection(CollectionView):
-    TABLE_NAME = "region"
-    PK_KEY = 'uuid'
+    table_name = "region"
+    primary_key = 'uuid'
 
 
 class RegionItem(ItemView):
-    TABLE_NAME = "region"
-    PK_KEY = 'uuid'
+    table_name = "region"
+    primary_key = 'uuid'
 
 
 class ProvinceCollection(CollectionView):
-    TABLE_NAME = "province"
-    PK_KEY = 'uuid'
+    table_name = "province"
+    primary_key = 'uuid'
 
 
 class ProvinceItem(ItemView):
-    TABLE_NAME = "province"
-    PK_KEY = 'uuid'
+    table_name = "province"
+    primary_key = 'uuid'
