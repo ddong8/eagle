@@ -1,5 +1,5 @@
 # eagle
-> 基于sanic封装的RESTful API框架.
+> 基于sanic的RESTful API框架.
 ## 功能说明
 - 基于sanic，非阻塞，高性能
 - 支持docker一键部署
