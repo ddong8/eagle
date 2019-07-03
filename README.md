@@ -2,7 +2,7 @@
 > 基于sanic封装的RESTful API框架.
 ## 功能说明
 - 基于sanic，非阻塞，高性能
-- 使用SQLAlchemy作为数据库后端，快速切换数据库
+- 支持docker一键部署
 - 项目生成工具
 - 快速RESTful CRUD API开发
 - filters，pagination，orders支持
