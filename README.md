@@ -8,8 +8,8 @@
 - filters，pagination，orders支持
 - validation数据校验
 - websocket协议支持
-- 异步任务集成[celery]
-- 定时任务集成[celery]
+- 异步任务集成[Celery]
+- 定时任务集成[Celery]
 - 频率限制
 - 国际化i18n支持
 - SMTP邮件、AD域、CSV导出、缓存等常用模块集成
