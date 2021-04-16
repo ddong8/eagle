@@ -32,7 +32,7 @@ async def initialize_app(application, loop):
             module.route.add_routes(application)
 
 
-@app.main_process_start
+@app.before_server_start
 async def initialize_db(application, loop):
     """
     initialize database.
@@ -43,8 +43,8 @@ async def initialize_db(application, loop):
     application.ctx.db_pool = await asyncpg.create_pool(
         **application.config.DB_CFG,
         max_inactive_connection_lifetime=60,
-        min_size=1,
-        max_size=3,
+        min_size=10,
+        max_size=10,
         loop=loop,
     )
     application.ctx.db = DB(application.ctx.db_pool)

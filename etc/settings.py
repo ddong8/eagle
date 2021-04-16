@@ -8,8 +8,7 @@
 
 import multiprocessing
 
-# workers = multiprocessing.cpu_count() * 2 + 1
-workers = 1
+workers = multiprocessing.cpu_count() * 2 + 1
 
 HOST = '0.0.0.0'
 PORT = 9000
