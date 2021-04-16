@@ -14,10 +14,10 @@ from sanic import Sanic
 from eagle.core.db import DB
 
 app = Sanic('eagle')
-app.config.from_pyfile('./etc/settings.py')
+app.config.update_config('./etc/settings.py')
 
 
-@app.listener('before_server_start')
+@app.main_process_start
 async def initialize_app(application, loop):
     """
     register route.
@@ -32,7 +32,7 @@ async def initialize_app(application, loop):
             module.route.add_routes(application)
 
 
-@app.listener('before_server_start')
+@app.main_process_start
 async def initialize_db(application, loop):
     """
     initialize database.
@@ -40,11 +40,11 @@ async def initialize_db(application, loop):
     :param loop: Sanic async event loop
     :return: None
     """
-    application.db_pool = await asyncpg.create_pool(
+    application.ctx.db_pool = await asyncpg.create_pool(
         **application.config.DB_CFG,
         max_inactive_connection_lifetime=60,
         min_size=1,
         max_size=3,
         loop=loop,
     )
-    application.db = DB(application.db_pool)
+    application.ctx.db = DB(application.ctx.db_pool)

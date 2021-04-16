@@ -33,14 +33,14 @@ class CollectionView(HTTPMethodView):
     table_name = None
 
     async def get(self, request, *args, **kwargs):
-        sql = curd.get_r_sql(self.table_name, conditions=request.raw_args)
-        records = await request.app.db.fetch(sql)
+        sql = curd.get_r_sql(self.table_name, conditions=request.args)
+        records = await request.app.ctx.db.fetch(sql)
         return records_to_json(records)
 
     async def post(self, request, *args, **kwargs):
         data = request.json
         sql = curd.get_c_sql(self.table_name, data)
-        await request.app.db.execute(sql)
+        await request.app.ctx.db.execute(sql)
         return json(data)
 
 
@@ -53,22 +53,22 @@ class ItemView(HTTPMethodView):
 
     async def get(self, request, *args, **kwargs):
         sql = curd.get_r_sql(self.table_name, conditions={self.primary_key: kwargs['rid']})
-        records = await request.app.db.fetch(sql)
+        records = await request.app.ctx.db.fetch(sql)
         return records_to_json(records)
 
     async def patch(self, request, *args, **kwargs):
         data = request.json
         sql = curd.get_u_sql(self.table_name, data, conditions={self.primary_key: kwargs['rid']})
-        await request.app.db.execute(sql)
+        await request.app.ctx.db.execute(sql)
         return json(data)
 
     async def put(self, request, *args, **kwargs):
         data = request.json
         sql = curd.get_u_sql(self.table_name, data, conditions={self.primary_key: kwargs['rid']})
-        await request.app.db.execute(sql)
+        await request.app.ctx.db.execute(sql)
         return json(data)
 
     async def delete(self, request, *args, **kwargs):
         sql = curd.get_d_sql(self.table_name, conditions={self.primary_key: kwargs['rid']})
-        await request.app.db.execute(sql)
+        await request.app.ctx.db.execute(sql)
         return json({'count': 1, 'rid': kwargs['rid']})

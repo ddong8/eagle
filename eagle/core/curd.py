@@ -13,10 +13,24 @@ def safe_cast_2_str(val, default=''):
     :param default: ''
     :return: string
     """
-    try:
-        return str(val)
-    except (ValueError, TypeError):
-        return default
+
+    def _convert(v):
+        try:
+            return str(v)
+        except (ValueError, TypeError):
+            return default
+
+    if isinstance(val, list):
+        if len(val) > 1:
+            temp_list = []
+            for x in val:
+                temp_list.append(_convert(x))
+            result_str = ','.join(temp_list)
+        else:
+            result_str = _convert(val[0])
+        return result_str
+    else:
+        return _convert(val)
 
 
 def dict_2_str(fields):
