@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  db:
+  db2:
     build: ./db
     environment:
       - POSTGRES_USER=postgres
@@ -9,19 +9,19 @@ services:
       - POSTGRES_DB=ork
     volumes:
       - ./db/init:/docker-entrypoint-initdb.d/
-    container_name: db
+    container_name: db2
     restart: always
     ports:
       - "5432:5432"
-  web:
+  web2:
     build: .
     restart: always
     volumes:
       - ./:/code
     ports:
-      - "80:8080"
+      - "9000:9000"
     links:
-      - db
+      - db2
     depends_on:
-      - db
-    container_name: web
+      - db2
+    container_name: web2

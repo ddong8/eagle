@@ -16,7 +16,10 @@ def safe_cast_2_str(val, default=''):
 
     def _convert(v):
         try:
-            return str(v)
+            if isinstance(v, str):
+                return v
+            else:
+                return str(v)
         except (ValueError, TypeError):
             return default
 
