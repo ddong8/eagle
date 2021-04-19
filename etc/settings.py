@@ -13,7 +13,7 @@ workers = multiprocessing.cpu_count() * 2 + 1
 HOST = '0.0.0.0'
 PORT = 9000
 
-DEBUG = True
+DEBUG = False
 ACCESS_LOG = True
 
 WORKERS = workers

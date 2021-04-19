@@ -25,6 +25,8 @@ def add_routes(api):
     api.add_route(controller.RegionItem.as_view(), '/region/<rid>')
     api.add_route(controller.ProvinceCollection.as_view(), '/provinces')
     api.add_route(controller.ProvinceItem.as_view(), '/province/<rid>')
+    api.add_route(controller.StockCollection.as_view(), '/stocks')
+    api.add_route(controller.StockItem.as_view(), '/stock/<rid>')
 
     @api.route("/")
     async def index(request):

@@ -48,3 +48,13 @@ class ProvinceCollection(CollectionView):
 class ProvinceItem(ItemView):
     table_name = "province"
     primary_key = 'uuid'
+
+
+class StockCollection(CollectionView):
+    table_name = "stock"
+    primary_key = 'id'
+
+
+class StockItem(ItemView):
+    table_name = "stock"
+    primary_key = 'id'
