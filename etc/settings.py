@@ -19,7 +19,7 @@ ACCESS_LOG = True
 WORKERS = workers
 
 DB_CFG = {
-    "host": "193.123.248.180",
+    "host": "eagle_db",
     "database": "ork",
     "user": "postgres",
     "password": "123456"

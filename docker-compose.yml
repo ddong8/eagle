@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  db2:
+  eagle_db:
     build: ./db
     environment:
       - POSTGRES_USER=postgres
@@ -9,11 +9,11 @@ services:
       - POSTGRES_DB=ork
     volumes:
       - ./db/init:/docker-entrypoint-initdb.d/
-    container_name: db2
+    container_name: eagle_db
     restart: always
     ports:
       - "5432:5432"
-  web2:
+  eagle_web:
     build: .
     restart: always
     volumes:
@@ -21,7 +21,7 @@ services:
     ports:
       - "9000:9000"
     links:
-      - db2
+      - eagle_db
     depends_on:
-      - db2
-    container_name: web2
+      - eagle_db
+    container_name: eagle_web
