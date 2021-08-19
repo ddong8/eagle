@@ -6,9 +6,10 @@
 # Do have a faith in what you're doing.
 # Make your life a story worth telling.
 
-from sanic import response
-
 from eagle.apps.traffic import controller
+from eagle.common import async_helper
+from eagle.workers.stock import callback
+from sanic import response
 
 
 def add_routes(api):
@@ -27,6 +28,8 @@ def add_routes(api):
     api.add_route(controller.ProvinceItem.as_view(), '/province/<rid>')
     api.add_route(controller.StockCollection.as_view(), '/stocks')
     api.add_route(controller.StockItem.as_view(), '/stock/<rid>')
+
+    async_helper.add_callback_route(api, callback.callback_add)
 
     @api.route("/")
     async def index(request):

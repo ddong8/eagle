@@ -14,7 +14,7 @@ from sanic import Sanic
 from eagle.core.db import DB
 
 app = Sanic('eagle')
-app.config.update_config('./etc/settings.py')
+app.config.update_config('./eagle/etc/settings.py')
 
 
 @app.main_process_start
