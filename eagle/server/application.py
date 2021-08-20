@@ -8,43 +8,21 @@
 
 import sys
 
-import asyncpg
-from sanic import Sanic
+import falcon
+from eagle.etc import settings
 
-from eagle.core.db import DB
-
-app = Sanic('eagle')
-app.config.update_config('./eagle/etc/settings.py')
+api = falcon.API()
 
 
-@app.main_process_start
-async def initialize_app(application, loop):
-    """
-    register route.
-    :param application: Sanic object
-    :param loop: Sanic async event loop
-    :return: None
-    """
-    for name in application.config.APPS:
+def initialize_applications(api):
+    """初始化wsgi application"""
+    for name in settings.APPS:
         if name:
             __import__(name)
-            module = sys.modules[name]
-            module.route.add_routes(application)
+            app = sys.modules[name]
+            app.route.add_routes(api)
+
+    return api
 
 
-@app.before_server_start
-async def initialize_db(application, loop):
-    """
-    initialize database.
-    :param application: Sanic object
-    :param loop: Sanic async event loop
-    :return: None
-    """
-    application.ctx.db_pool = await asyncpg.create_pool(
-        **application.config.DB_CFG,
-        max_inactive_connection_lifetime=60,
-        min_size=10,
-        max_size=10,
-        loop=loop,
-    )
-    application.ctx.db = DB(application.ctx.db_pool)
+app = initialize_applications(api)

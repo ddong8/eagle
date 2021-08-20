@@ -1,5 +1,6 @@
-from eagle.common import celery
-from eagle.common import async_helper
+import json
+
+from eagle.common import async_helper, celery
 from eagle.workers.stock import callback
 
 
@@ -16,7 +17,7 @@ def add(task_id, x, y):
     # 仅接受data参数，若有多个参数，可打包为可json序列化的类型
     # task_id为url接受参数(所以函数也必须接受此参数)
     async_helper.send_callback("http://127.0.0.1:9000", callback.callback_add,
-                               '',
+                               data=json.dumps({"result": result}),
                                task_id=task_id)
     # 此处是异步回调结果，不需要服务器等待或者轮询，worker会主动发送进度或者结果，可以不return
     # 如果想要使用return方式，则按照正常celery流程编写代码

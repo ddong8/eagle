@@ -6,28 +6,12 @@
 # Do have a faith in what you're doing.
 # Make your life a story worth telling.
 
-import multiprocessing
-
-workers = multiprocessing.cpu_count() * 2 + 1
-
 HOST = '127.0.0.1'
 PORT = 9000
 
 APP_NAME = 'eagle'
 
 PUBLIC_ENDPOINT = 'http://127.0.0.1:9000'
-
-DEBUG = False
-ACCESS_LOG = True
-
-WORKERS = workers
-
-DB_CFG = {
-    "host": "www.ihasy.com",
-    "database": "ork",
-    "user": "postgres",
-    "password": "123456"
-}
 
 APPS = [
     'eagle.apps.traffic',

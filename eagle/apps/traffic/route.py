@@ -6,10 +6,8 @@
 # Do have a faith in what you're doing.
 # Make your life a story worth telling.
 
-from eagle.apps.traffic import controller
 from eagle.common import async_helper
 from eagle.workers.stock import callback
-from sanic import response
 
 
 def add_routes(api):
@@ -18,24 +16,4 @@ def add_routes(api):
     :param api: Sanic object
     :return: None
     """
-    api.add_route(controller.CityCollection.as_view(), '/cities')
-    api.add_route(controller.CityItem.as_view(), '/city/<rid>')
-    api.add_route(controller.LineCollection.as_view(), '/lines')
-    api.add_route(controller.LineItem.as_view(), '/line/<rid>')
-    api.add_route(controller.RegionCollection.as_view(), '/regions')
-    api.add_route(controller.RegionItem.as_view(), '/region/<rid>')
-    api.add_route(controller.ProvinceCollection.as_view(), '/provinces')
-    api.add_route(controller.ProvinceItem.as_view(), '/province/<rid>')
-    api.add_route(controller.StockCollection.as_view(), '/stocks')
-    api.add_route(controller.StockItem.as_view(), '/stock/<rid>')
-
     async_helper.add_callback_route(api, callback.callback_add)
-
-    @api.route("/")
-    async def index(request):
-        """
-        index url
-        :param request: Sanic request.
-        :return: html
-        """
-        return response.html(body="welcome come to api service!", status=200)

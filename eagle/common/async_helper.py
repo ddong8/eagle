@@ -10,12 +10,11 @@ from eagle.common import celery
 from eagle.core import exceptions
 from eagle.etc import settings
 from eagle.utils import http_util, uri_util
-from sanic.views import HTTPMethodView
 
 LOG = logging.getLogger(__name__)
 
 
-class CallbackController(HTTPMethodView):
+class CallbackController(object):
 
     def __init__(self, func, method, name=None, with_request=False, with_response=False):
         self.name = name or uuid.uuid4().hex
@@ -209,8 +208,8 @@ def add_callback_route(api, func):
     method = func.method.lower()
     with_request = func.with_request
     with_response = func.with_response
-    api.add_route(CallbackController(func, method, name=name,
-                                     with_request=with_request, with_response=with_response).as_view(), url)
+    api.add_route(url, CallbackController(func, method, name=name,
+                                          with_request=with_request, with_response=with_response))
 
 
 # since v1.1.9, rename callback to rpc

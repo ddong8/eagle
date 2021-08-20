@@ -6,4 +6,5 @@ from eagle.common import async_helper
 def callback_add(data, task_id, request=None, response=None):
     # 想要使用db功能，需要修改{$project_name}.server.celery_worker文件的默认项
     # 移除 # base.initialize_db()的注释符号
-    task_db_api().update(task_id, data)
+    # task_db_api().update(task_id, data)
+    pass

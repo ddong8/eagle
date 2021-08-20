@@ -6,10 +6,15 @@
 # Do have a faith in what you're doing.
 # Make your life a story worth telling.
 
+from wsgiref.simple_server import make_server
+
+from eagle.etc import settings
 from eagle.server.application import app
 
 
 def run():
-    config = app.config
-    app.run(host=config.HOST, port=config.PORT,
-            debug=config.DEBUG, access_log=config.ACCESS_LOG, workers=config.WORKERS)
+    host = settings.HOST
+    port = settings.PORT
+    httpd = make_server(host=host, port=port, app=app)
+    print("Serving on %s:%d..." % (host, port))
+    httpd.serve_forever()
