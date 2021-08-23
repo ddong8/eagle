@@ -3,7 +3,6 @@
 
 ## 功能说明
 - 支持docker一键部署
-- 项目生成工具
 - 快速RESTful CRUD API开发
 - 异步任务集成[Celery]
 - 定时任务集成[Celery]

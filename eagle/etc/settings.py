@@ -18,9 +18,11 @@ APPS = [
 ]
 
 CELERY = {
+    "timezone": 'Asia/Shanghai',
+    "enable_utc": True,
     "worker_concurrency": 8,
-    "broker_url": "pyamqp://admin:admin@www.ihasy.com//",
-    "result_backend": "redis://www.ihasy.com",
+    "broker_url": "redis://www.ihasy.com/0",
+    "result_backend": "redis://www.ihasy.com/0",
     "imports": [
         "eagle.workers.stock.tasks"
     ],

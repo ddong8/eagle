@@ -11,7 +11,7 @@ import sys
 import falcon
 from eagle.etc import settings
 
-api = falcon.API()
+api = falcon.App()
 
 
 def initialize_applications(api):
