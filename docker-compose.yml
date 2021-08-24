@@ -30,9 +30,7 @@ services:
     volumes:
       - ./:/code
     command:
-      - /bin/bash -c "python -m celery -A celery_worker worker -l info -c 10 -Q eagle"
-      - /bin/bash -c "python -m celery -A celery_worker beat -l info -c 10"
-      - /bin/bash -c "python -m celery -A celery_worker flower --address=0.0.0.0 --port=5555"
+      - /bin/bash -c "/code/celery_start.sh"
     ports:
       - "9000:9000"
       - "5555:5555"
