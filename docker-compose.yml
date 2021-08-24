@@ -19,7 +19,7 @@ services:
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf:rw
       - ./redis/data:/data:rw
     command:
-      /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
+      - /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
     container_name: eagle_redis
     restart: always
     ports:
@@ -29,6 +29,10 @@ services:
     restart: always
     volumes:
       - ./:/code
+    command:
+      - /bin/bash -c "python -m celery -A celery_worker worker -l info -c 10 -Q eagle"
+      - /bin/bash -c "python -m celery -A celery_worker beat -l info -c 10"
+      - /bin/bash -c "python -m celery -A celery_worker flower --address=0.0.0.0 --port=5555"
     ports:
       - "9000:9000"
       - "5555:5555"
