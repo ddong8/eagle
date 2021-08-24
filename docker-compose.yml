@@ -13,6 +13,12 @@ services:
     restart: always
     ports:
       - "5432:5432"
+  eagle_redis:
+    image: "redis:alpine"
+    container_name: eagle_redis
+    restart: always
+    ports:
+      - "6379:6379"
   eagle_web:
     build: .
     restart: always
@@ -22,6 +28,8 @@ services:
       - "9000:9000"
     links:
       - eagle_db
+      - eagle_redis
     depends_on:
       - eagle_db
+      - eagle_redis
     container_name: eagle_web
