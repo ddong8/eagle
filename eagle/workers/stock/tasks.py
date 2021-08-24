@@ -52,7 +52,7 @@ def get_workday(date_obj):
 
 def write_to_table(df, table_name, if_exists='append'):
     db_engine = create_engine(
-        'postgresql+psycopg2://postgres:123456@193.123.248.180:5432/ork')  # 初始化引擎
+        'postgresql+psycopg2://postgres:123456@eagle_db:5432/ork')  # 初始化引擎
     string_data_io = io.StringIO()
     df.to_csv(string_data_io, sep='|', index=False)
     pd_sql_engine = pd.io.sql.pandasSQL_builder(db_engine)
