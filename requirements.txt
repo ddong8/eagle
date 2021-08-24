@@ -1,3 +1,4 @@
 falcon
 celery[redis]
 flower
+sqlalchemy
