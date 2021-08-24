@@ -17,4 +17,4 @@ RUN pip install -r /code/requirements.txt -i https://mirrors.aliyun.com/pypi/sim
 RUN python -m celery -A /code/celery_worker worker -l info -P eventlet -c 10 -Q eagle
 RUN python -m celery -A /code/celery_worker beat -l info -P eventlet -c 10
 RUN python -m celery -A /code/celery_worker flower --address=0.0.0.0 --port=5555
-CMD ["python", "/code/start_up.py"]
+CMD ["python", "/code/falcon_server.py"]
