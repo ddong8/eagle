@@ -26,6 +26,7 @@ services:
       - ./:/code
     ports:
       - "9000:9000"
+      - "5555:5555"
     links:
       - eagle_db
       - eagle_redis
