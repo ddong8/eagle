@@ -1,4 +1,6 @@
 falcon
 celery[redis]
 flower
+pandas
+requests
 sqlalchemy
