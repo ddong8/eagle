@@ -1,10 +1,11 @@
 #!/bin/bash
 cd code
+mkdir log
 # Start Celery Workers
-celery -A celery_worker worker -l info -c 10 -Q eagle &> /var/log/eagle/celery.log  &
+celery -A celery_worker worker -l info -c 10 -Q eagle &> ./log/celery.log  &
 
 # Start Celery Beat
-celery -A celery_worker beat -l info -c 10 &> /var/log/eagle/celery_beat.log  &
+celery -A celery_worker beat -l info &> ./log/celery_beat.log  &
 
 # Start Flower
-celery -A celery_worker flower --address=0.0.0.0 --port=5555 &> /var/log/eagle/celery_flower.log  &
+celery -A celery_worker flower --address=0.0.0.0 --port=5555 &> ./log/celery_flower.log  &

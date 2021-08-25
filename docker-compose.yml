@@ -30,7 +30,7 @@ services:
     volumes:
       - ./:/code
     command:
-      - /bin/bash -c "/code/celery_start.sh"
+      - /bin/bash -c "cd code && ./celery_start.sh"
     ports:
       - "9000:9000"
       - "5555:5555"
