@@ -1,6 +1,7 @@
 #!/bin/bash
 cd /code
-mkdir log
+mkdir -p log
+chmod -R 777 log
 # Start Celery Workers
 celery -A celery_worker worker -l info -c 10 -Q eagle &> ./log/celery.log  &
 

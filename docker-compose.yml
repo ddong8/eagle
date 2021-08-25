@@ -26,7 +26,7 @@ services:
     restart: always
     volumes:
       - ./:/code
-    command: /bin/bash -c "cd code && chmod -R 777 ./celery_start.sh && ./celery_start.sh"
+    command: /bin/bash -c "cd /code && chmod -R 777 ./celery_start.sh && ./celery_start.sh"
     ports:
       - "9000:9000"
       - "5555:5555"
