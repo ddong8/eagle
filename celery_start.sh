@@ -1,5 +1,5 @@
 #!/bin/bash
-cd code
+cd /code
 mkdir log
 # Start Celery Workers
 celery -A celery_worker worker -l info -c 10 -Q eagle &> ./log/celery.log  &
