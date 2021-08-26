@@ -28,7 +28,6 @@ services:
       - ./:/code
     ports:
       - "9000:9000"
-      - "5555:5555"
     links:
       - eagle_db
       - eagle_redis
@@ -43,5 +42,37 @@ services:
     links:
       - eagle_db
       - eagle_redis
+    depends_on:
+      - eagle_db
+      - eagle_redis
     volumes:
       - .:/code:ro
+    container_name: eagle_celery
+  eagle_beat:
+    build: .
+    command: "celery -A celery_worker beat -l info"
+    user: nobody
+    links:
+      - eagle_db
+      - eagle_redis
+    depends_on:
+      - eagle_db
+      - eagle_redis
+    volumes:
+      - .:/code:ro
+    container_name: eagle_beat
+  eagle_flower:
+    build: .
+    command: "celery -A celery_worker flower --address=0.0.0.0 --port=5555"
+    user: nobody
+    links:
+      - eagle_db
+      - eagle_redis
+    depends_on:
+      - eagle_db
+      - eagle_redis
+    volumes:
+      - .:/code:ro
+    ports:
+      - "5555:5555"
+    container_name: eagle_flower
