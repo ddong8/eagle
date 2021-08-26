@@ -67,9 +67,11 @@ services:
     links:
       - eagle_db
       - eagle_redis
+      - eagle_celery
     depends_on:
       - eagle_db
       - eagle_redis
+      - eagle_celery
     volumes:
       - .:/code:ro
     ports:
