@@ -37,7 +37,7 @@ services:
     container_name: eagle_web
   eagle_celery:
     build: .
-    command: "celery -A celery_worker worker -l info -c 10 -Q eagle"
+    command: "celery -A celery_worker worker -l info -E -c 10 -Q eagle"
     user: nobody
     links:
       - eagle_db
@@ -51,7 +51,6 @@ services:
   eagle_beat:
     build: .
     command: "celery -A celery_worker beat -l info"
-    user: nobody
     links:
       - eagle_db
       - eagle_redis
@@ -63,7 +62,7 @@ services:
     container_name: eagle_beat
   eagle_flower:
     build: .
-    command: "celery -A celery_worker flower --address=0.0.0.0 --port=5555"
+    command: "celery -A celery_worker flower --address=0.0.0.0 --port=5555 --basic_auth=ddong:dong159357"
     user: nobody
     links:
       - eagle_db
