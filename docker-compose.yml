@@ -59,7 +59,7 @@ services:
       - eagle_db
       - eagle_redis
     volumes:
-      - .:/code:ro
+      - .:/code:rw
     container_name: eagle_beat
   eagle_flower:
     build: .

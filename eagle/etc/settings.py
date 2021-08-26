@@ -8,7 +8,7 @@
 
 from celery.schedules import crontab
 
-HOST = '127.0.0.1'
+HOST = '0.0.0.0'
 PORT = 9000
 
 APP_NAME = 'eagle'
