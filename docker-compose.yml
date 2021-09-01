@@ -14,18 +14,15 @@ services:
     ports:
       - "5432:5432"
   eagle_redis:
-    image: redis:latest
-    volumes:
-      - ./redis/data:/data:rw
-    container_name: eagle_redis
-    restart: always
+    image: redis:6.0.3-alpine
+    container_name: "eagle_redis"
     ports:
-      - 6379:6379
+      - "6379:6379"
+    restart: always     # "unless-stopped" or "always"
+    ## UNCOMMENT THESE LINES IF WE USE CUSTOM REDIS CONFIG ##
     volumes:
-      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf:rw
-      - ./redis/data:/data:rw
-    command:
-      /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf "
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf    
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
   eagle_web:
     build: .
     restart: always
