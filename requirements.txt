@@ -3,4 +3,5 @@ celery[redis]
 flower
 pandas
 requests
+psycopg2
 sqlalchemy
