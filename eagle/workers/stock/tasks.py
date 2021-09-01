@@ -22,7 +22,7 @@ def add(task_id, x, y):
     # url_base为callback注册的api地址，eg: http://127.0.0.1:9001
     # 仅接受data参数，若有多个参数，可打包为可json序列化的类型
     # task_id为url接受参数(所以函数也必须接受此参数)
-    async_helper.send_callback("http://127.0.0.1:9000", callback.callback_add,
+    async_helper.send_callback(None, callback.callback_add,
                                data=json.dumps({"result": result}),
                                task_id=task_id)
     # 此处是异步回调结果，不需要服务器等待或者轮询，worker会主动发送进度或者结果，可以不return
