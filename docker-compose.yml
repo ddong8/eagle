@@ -14,7 +14,7 @@ services:
     ports:
       - "5432:5432"
   eagle_redis:
-    image: redis:6.0.3-alpine
+    image: redis:alpine
     container_name: "eagle_redis"
     ports:
       - "6379:6379"
