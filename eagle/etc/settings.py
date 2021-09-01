@@ -41,7 +41,7 @@ CELERY = {
         "add-every-workday-afternoon": {
             "task": "eagle.workers.stock.tasks.add",
             "schedule": crontab(hour=18, minute=0, day_of_week='mon,tue,wed,thu,fri'),
-            "args": [3, 6]
+            "args": ["id1", 3, 6]
         }
     }
 }
