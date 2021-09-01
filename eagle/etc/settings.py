@@ -13,7 +13,7 @@ PORT = 9000
 
 APP_NAME = 'eagle'
 
-PUBLIC_ENDPOINT = 'http://127.0.0.1:9000'
+PUBLIC_ENDPOINT = 'http://eagle_web:9000'
 
 APPS = [
     'eagle.apps.traffic',
@@ -49,6 +49,6 @@ CELERY = {
 CELERY_WORKER = {
     "callback": {
         "strict_client": True,
-        "allow_hosts": ["eagle_redis"]
+        "allow_hosts": ["eagle_redis", "eagle_web"]
     }
 }
