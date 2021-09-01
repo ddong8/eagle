@@ -23,8 +23,8 @@ CELERY = {
     "timezone": 'Asia/Shanghai',
     "enable_utc": True,
     "worker_concurrency": 8,
-    "broker_url": "redis://eagle_redis/0",
-    "result_backend": "redis://eagle_redis/0",
+    "broker_url": "redis://:ddong.ihasy@eagle_redis/0",
+    "result_backend": "redis://:ddong.ihasy@eagle_redis/0",
     "imports": [
         "eagle.workers.stock.tasks"
     ],
