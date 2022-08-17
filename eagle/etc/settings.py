@@ -21,7 +21,7 @@ APPS = [
 
 CELERY = {
     "timezone": 'Asia/Shanghai',
-    "enable_utc": True,
+    "enable_utc": False,
     "worker_concurrency": 8,
     "broker_url": "redis://:ddong.ihasy@eagle_redis/0",
     "result_backend": "redis://:ddong.ihasy@eagle_redis/0",

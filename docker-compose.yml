@@ -9,6 +9,7 @@ services:
       - POSTGRES_DB=ork
     volumes:
       - ./db/init:/docker-entrypoint-initdb.d/
+      - /etc/localtime:/etc/localtime
     container_name: eagle_db
     restart: always
     ports:
@@ -21,13 +22,15 @@ services:
     restart: always     # "unless-stopped" or "always"
     ## UNCOMMENT THESE LINES IF WE USE CUSTOM REDIS CONFIG ##
     volumes:
-      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf    
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - /etc/localtime:/etc/localtime    
     command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
   eagle_web:
     build: .
     restart: always
     volumes:
       - ./:/code
+      - /etc/localtime:/etc/localtime
     ports:
       - "9000:9000"
     links:
@@ -49,6 +52,7 @@ services:
       - eagle_redis
     volumes:
       - .:/code:ro
+      - /etc/localtime:/etc/localtime
     container_name: eagle_celery
   eagle_beat:
     build: .
@@ -61,6 +65,7 @@ services:
       - eagle_redis
     volumes:
       - .:/code:rw
+      - /etc/localtime:/etc/localtime
     container_name: eagle_beat
   eagle_flower:
     build: .
@@ -76,6 +81,7 @@ services:
       - eagle_celery
     volumes:
       - .:/code:ro
+      - /etc/localtime:/etc/localtime
     ports:
       - "5555:5555"
     container_name: eagle_flower
