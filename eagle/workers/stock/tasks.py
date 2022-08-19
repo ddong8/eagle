@@ -76,33 +76,33 @@ def get_top_list(date_obj):
 
 
 def raw_top_list(date_str):
-    LHB_URL = 'http://data.eastmoney.com/DataCenter_V3/stock2016/TradeDetail/pagesize=200,page=1,sortRule=-1,sortType=,startDate={startDate},endDate={endDate},gpfw=0,js=vardata_tab_1.html'.format(
-        startDate=date_str, endDate=date_str)
-    req = requests.get(url=LHB_URL)
-    resp_text = req.text
-    resp_json = json.loads(resp_text.replace('vardata_tab_1=', ''))
-    resp_data = resp_json.get('data', [])
-    df = pd.DataFrame(resp_data, columns=[
-                      'SCode', 'SName', 'Chgradio', 'ZeMoney', 'Bmoney', 'Smoney', 'Ctypedes', 'Turnover'])
-    df.columns = ['code', 'name', 'pchange',
-                  'amount', 'buy', 'sell', 'reason', 'Turnover']
+    url = f'https://datacenter-web.eastmoney.com/api/data/v1/get?callback=jQuery112307541372703667037_1660893715485&sortColumns=NET_BUY_AMT&sortTypes=-1&pageSize=500&pageNumber=1&reportName=RPT_ORGANIZATION_TRADE_DETAILS&columns=ALL&source=WEB&client=WEB&filter=(TRADE_DATE%3E=%27{date_str}%27)'
+    
+    resp = requests.get(url)
+    raw_data = resp.text
+    raw_data = resp.text.split('(')[1].split(')')[0]
+    json_data = json.loads(raw_data)
+    stock_data_list = json_data['result']['data']
+    data_list = []
+    for stock in stock_data_list:
+        data_list.append({'code': stock['SECURITY_CODE'],
+                          'name': stock['SECURITY_NAME_ABBR'],
+                          'trade_date': stock['TRADE_DATE'],
+                          'change_rate': stock['CHANGE_RATE'],
+                          'close_price': stock['CLOSE_PRICE'],
+                          'buy_amt': stock['BUY_AMT'],
+                          'net_buy_amt': stock['NET_BUY_AMT'],
+                          'accum_amount': stock['ACCUM_AMOUNT'],
+                          'market': stock['MARKET'],
+                          'explanation': stock['EXPLANATION']
+                          })
+
+    df = pd.DataFrame(data_list, columns=[
+        'code', 'name', 'trade_date', 'change_rate', 'close_price', 'buy_amt', 'net_buy_amt', 'accum_amount', 'market', 'explanation'])
+
     df = df.fillna(0)
     df = df.replace('', 0)
     df['id'] = range(len(df))
-    df['buy'] = df['buy'].astype(float)
-    df['sell'] = df['sell'].astype(float)
-    df['amount'] = df['amount'].astype(float)
-    df['Turnover'] = df['Turnover'].astype(float)
-    df['bratio'] = df['buy'] / df['Turnover']
-    df['sratio'] = df['sell'] / df['Turnover']
-    df['bratio'] = df['bratio'].map(lambda x: '%.2f' % x)
-    df['sratio'] = df['sratio'].map(lambda x: '%.2f' % x)
-    df['date'] = date_str
-    for col in ['amount', 'buy', 'sell']:
-        df[col] = df[col].astype(float)
-        df[col] = df[col] / 10000
-        df[col] = df[col].map(lambda x: '%.2f' % x)
-    df = df.drop('Turnover', axis=1)
     return df
 
 
