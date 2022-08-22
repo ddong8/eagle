@@ -1,28 +1,37 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 5/20/2019 3:25 PM
+# @Time    : 2022/08/22 15:25
 # @File    : application.py
 # @Author  : donghaixing
 # Do have a faith in what you're doing.
 # Make your life a story worth telling.
 
-import sys
 
-import falcon
-from eagle.etc import settings
+from fastapi import FastAPI
 
-api = falcon.App()
+app = FastAPI()
 
 
-def initialize_applications(api):
-    """初始化wsgi application"""
-    for name in settings.APPS:
-        if name:
-            __import__(name)
-            app = sys.modules[name]
-            app.route.add_routes(api)
-
-    return api
+def initialize_database():
+    from eagle.db.pool import POOL
 
 
-app = initialize_applications(api)
+def initialize_middleware():
+    pass
+
+
+def initialize_router():
+    from eagle.router import stock
+    app.include_router(stock.router)
+
+
+def initialize_applications():
+    pass
+
+
+def initialize_server():
+    initialize_applications()
+    initialize_router()
+
+
+initialize_server()
