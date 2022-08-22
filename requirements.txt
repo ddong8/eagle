@@ -2,6 +2,7 @@ falcon
 celery[redis]
 flower
 pandas
+loguru
 requests
 psycopg2
 sqlalchemy

@@ -8,8 +8,14 @@
 
 
 from fastapi import FastAPI
+from loguru import logger
 
 app = FastAPI()
+
+
+def initialize_logger():
+    logger.add("eagle_api.log", rotation="500 MB", enqueue=True)
+    logger.info("logger initialize done...")
 
 
 def initialize_database():
@@ -26,12 +32,14 @@ def initialize_router():
 
 
 def initialize_applications():
-    pass
+    initialize_router()
+    initialize_router()
 
 
 def initialize_server():
+    initialize_logger()
+    initialize_database()
     initialize_applications()
-    initialize_router()
 
 
 initialize_server()
