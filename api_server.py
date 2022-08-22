@@ -31,4 +31,4 @@ async def sync_stock_data(date_str: str):
 
 
 if __name__ == '__main__':
-    uvicorn.run("api:app", host="0.0.0.0", port=9000)
+    uvicorn.run("api_server:app", host="0.0.0.0", port=9000)
