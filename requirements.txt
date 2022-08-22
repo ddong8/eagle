@@ -5,5 +5,4 @@ pandas
 requests
 psycopg2
 sqlalchemy
-fastapi
-uvicorn[standard]
+fastapi[all]
