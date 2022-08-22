@@ -13,5 +13,5 @@ ADD ./ /code
 
 WORKDIR /code
 
-RUN pip install -r /code/requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
-CMD ["python", "/code/falcon_server.py"]
+RUN pip install -r /code/requirements.txt
+CMD ["python", "/code/api_server.py"]

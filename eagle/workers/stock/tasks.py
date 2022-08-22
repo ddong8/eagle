@@ -77,7 +77,7 @@ def get_top_list(date_obj):
 
 def raw_top_list(date_str):
     url = f'https://datacenter-web.eastmoney.com/api/data/v1/get?callback=jQuery112307541372703667037_1660893715485&sortColumns=NET_BUY_AMT&sortTypes=-1&pageSize=500&pageNumber=1&reportName=RPT_ORGANIZATION_TRADE_DETAILS&columns=ALL&source=WEB&client=WEB&filter=(TRADE_DATE%3E=%27{date_str}%27)'
-    
+
     resp = requests.get(url)
     raw_data = resp.text
     raw_data = resp.text.split('(')[1].split(')')[0]
@@ -98,7 +98,7 @@ def raw_top_list(date_str):
                           })
 
     df = pd.DataFrame(data_list, columns=[
-        'code', 'name', 'trade_date', 'change_rate', 'close_price', 'buy_amt', 'net_buy_amt', 'accum_amount', 'market', 'explanation'])
+        'id', 'code', 'name', 'trade_date', 'change_rate', 'close_price', 'buy_amt', 'net_buy_amt', 'accum_amount', 'market', 'explanation'])
 
     df = df.fillna(0)
     df = df.replace('', 0)
