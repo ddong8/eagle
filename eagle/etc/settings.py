@@ -6,6 +6,10 @@
 # Do have a faith in what you're doing.
 # Make your life a story worth telling.
 
+
+import logging
+import sys
+
 from celery.schedules import crontab
 
 HOST = '0.0.0.0'
@@ -18,6 +22,34 @@ PUBLIC_ENDPOINT = 'http://eagle_web:9000'
 APPS = [
     'eagle.apps.traffic',
 ]
+
+LOGURU_CONFIG = {
+    "handlers": [
+        {
+            "sink": sys.stdout,
+            "level": logging.INFO,
+            "format": "<green>{time:YYYY-mm-dd HH:mm:ss.SSS}</green> | {thread.name} | <level>{level}</level> | "
+            "<cyan>{module}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>"
+        },
+        {
+            "sink": "eagle_api.log",
+            "level": logging.INFO,
+            "rotation": "10 MB",
+            "retention": "1 week",
+            "encoding": 'utf-8',
+            "format": "{time:YYYY-mm-dd HH:mm:ss.SSS} | {thread.name} | {level} | {module} : {function}:{line} -  {message}"
+        },
+        {
+            "sink": "eagle_api_error.log",
+            "serialize": True,
+            "level": logging.ERROR,
+            "retention": "1 week",
+            "rotation": "10 MB",
+            "encoding": 'utf-8',
+            "format": "{time:YYYY-mm-dd HH:mm:ss.SSS} | {thread.name} | {level} | {module} : {function}:{line} -  {message}"
+        },
+    ],
+}
 
 CELERY = {
     "timezone": 'Asia/Shanghai',

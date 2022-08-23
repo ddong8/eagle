@@ -7,19 +7,21 @@
 # Make your life a story worth telling.
 
 
+import uvicorn
+from eagle.core.logger import init_logger
+from eagle.etc import settings
 from fastapi import FastAPI
-from loguru import logger
 
 app = FastAPI()
 
 
 def initialize_logger():
-    logger.add("eagle_api.log", rotation="500 MB", enqueue=True)
-    logger.info("logger initialize done...")
+    init_logger()
 
 
 def initialize_database():
-    from eagle.db.pool import POOL
+    # from eagle.db.pool import POOL
+    pass
 
 
 def initialize_middleware():
@@ -27,19 +29,26 @@ def initialize_middleware():
 
 
 def initialize_router():
-    from eagle.router import stock
+    from eagle.apps import stock
     app.include_router(stock.router)
 
 
 def initialize_applications():
-    initialize_router()
+    initialize_database()
+    initialize_middleware()
     initialize_router()
 
 
 def initialize_server():
+    config = uvicorn.Config("eagle.server.application:app",
+                            host=settings.HOST,
+                            port=settings.PORT,
+                            reload=True,
+                            access_log=True)
+    server = uvicorn.Server(config)
     initialize_logger()
-    initialize_database()
     initialize_applications()
+    return server
 
 
-initialize_server()
+server = initialize_server()

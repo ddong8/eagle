@@ -7,12 +7,8 @@
 # Make your life a story worth telling.
 
 
-import uvicorn
-from eagle.etc import settings
+from eagle.server.application import server
 
 
 def run():
-    host = settings.HOST
-    port = settings.PORT
-    uvicorn.run("eagle.server.application:app",
-                host=host, port=port, reload=True)
+    server.run()
