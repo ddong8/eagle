@@ -1,8 +1,11 @@
 # from typing import List
-from fastapi import APIRouter
 # from fastapi import Depends, HTTPException
 # from eagle.core import crud, models, schemas
 from eagle.workers.stock import tasks
+from fastapi import APIRouter
+
+from .resource import Stock
+
 # from sqlalchemy.orm import Session
 # from eagle.core.database import SessionLocal, engine
 
@@ -16,7 +19,7 @@ from eagle.workers.stock import tasks
 #     finally:
 #         db.close()
 
-router =  APIRouter(
+router = APIRouter(
     prefix="",
 )
 
@@ -53,6 +56,12 @@ router =  APIRouter(
 # def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 #     items = crud.get_items(db, skip=skip, limit=limit)
 #     return items
+
+
+@router.get("/stock/get_data/{date_str}")
+async def get_stock_data(date_str: str):
+    stock_data = Stock().list(filters={'trade_date': date_str})
+    return {"data": stock_data}
 
 
 @router.put("/stock/sync_data/{date_str}")

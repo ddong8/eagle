@@ -16,17 +16,6 @@ import threading
 import sqlalchemy
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-CONN_STR = f""
-
-DB_CONFIG = {
-    "connection": CONN_STR,
-    "pool_size": 3,
-    "pool_recycle": 3600,
-    "pool_timeout": 5,
-    "max_overflow": 5,
-    "pool_pre_ping": True
-}
-
 
 def singleton(cls):
     """单例模式装饰器"""

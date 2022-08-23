@@ -23,6 +23,15 @@ APPS = [
     'eagle.apps.traffic',
 ]
 
+DB_CONFIG = {
+    "connection": "postgresql+psycopg2://postgres:123456@global.ihasy.com/ork",
+    "pool_size": 3,
+    "pool_recycle": 3600,
+    "pool_timeout": 5,
+    "max_overflow": 5,
+    "pool_pre_ping": True
+}
+
 LOGURU_CONFIG = {
     "handlers": [
         {

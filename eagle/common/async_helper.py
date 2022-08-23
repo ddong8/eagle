@@ -7,7 +7,7 @@ import logging
 import uuid
 
 from eagle.common import celery
-from eagle.core import exceptions
+from eagle.core import exception
 from eagle.etc import settings
 from eagle.utils import http_util, uri_util
 
@@ -61,7 +61,7 @@ class CallbackController(object):
             allow_hosts = [ipaddress.IPv4Network(
                 h, strict=False) for h in allow_hosts]
         if allow_hosts is not None and ipaddress.IPv4Address(cur_client) not in allow_hosts:
-            raise exceptions.ForbiddenError()
+            raise exception.ForbiddenError()
 
     def template(self, req, resp, **kwargs):
         self._check_auth(req, resp)

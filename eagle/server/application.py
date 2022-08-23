@@ -20,8 +20,8 @@ def initialize_logger():
 
 
 def initialize_database():
-    # from eagle.db.pool import POOL
-    pass
+    from eagle.db import pool
+    pool.defaultPool.reflesh(param=settings.DB_CONFIG)
 
 
 def initialize_middleware():
