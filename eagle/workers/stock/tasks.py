@@ -1,10 +1,12 @@
 import datetime
 import io
 import json
+from uuid import uuid4
 
 import pandas as pd
 import requests
 from eagle.common import async_helper, celery
+from eagle.etc.settings import CONN_STR
 from eagle.workers.stock import callback
 from sqlalchemy import create_engine
 
@@ -51,8 +53,7 @@ def get_workday(date_obj):
 
 
 def write_to_table(df, table_name, if_exists='append'):
-    db_engine = create_engine(
-        'postgresql+psycopg2://postgres:123456@eagle_db:5432/ork')  # 初始化引擎
+    db_engine = create_engine(CONN_STR)  # 初始化引擎
     string_data_io = io.StringIO()
     df.to_csv(string_data_io, sep='|', index=False)
     pd_sql_engine = pd.io.sql.pandasSQL_builder(db_engine)
@@ -85,24 +86,25 @@ def raw_top_list(date_str):
     stock_data_list = json_data['result']['data']
     data_list = []
     for stock in stock_data_list:
-        data_list.append({'code': stock['SECURITY_CODE'],
-                          'name': stock['SECURITY_NAME_ABBR'],
-                          'trade_date': stock['TRADE_DATE'],
-                          'change_rate': stock['CHANGE_RATE'],
-                          'close_price': stock['CLOSE_PRICE'],
-                          'buy_amt': stock['BUY_AMT'],
-                          'net_buy_amt': stock['NET_BUY_AMT'],
-                          'accum_amount': stock['ACCUM_AMOUNT'],
-                          'market': stock['MARKET'],
-                          'explanation': stock['EXPLANATION']
-                          })
+        data_list.append({
+            'id': str(uuid4()),
+            'code': stock['SECURITY_CODE'],
+            'name': stock['SECURITY_NAME_ABBR'],
+            'trade_date': stock['TRADE_DATE'].split(" ")[0],
+            'change_rate': stock['CHANGE_RATE'],
+            'close_price': stock['CLOSE_PRICE'],
+            'buy_amt': stock['BUY_AMT'],
+            'net_buy_amt': stock['NET_BUY_AMT'],
+            'accum_amount': stock['ACCUM_AMOUNT'],
+            'market': stock['MARKET'],
+            'explanation': stock['EXPLANATION']
+        })
 
     df = pd.DataFrame(data_list, columns=[
         'id', 'code', 'name', 'trade_date', 'change_rate', 'close_price', 'buy_amt', 'net_buy_amt', 'accum_amount', 'market', 'explanation'])
 
     df = df.fillna(0)
     df = df.replace('', 0)
-    df['id'] = range(len(df))
     return df
 
 

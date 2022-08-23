@@ -1,4 +1,4 @@
-from sqlalchemy import DECIMAL, Column, Integer, Text
+from sqlalchemy import DECIMAL, Column, Integer, String, Text
 from sqlalchemy.ext.declarative import declarative_base
 
 from .dictbase import DictBase
@@ -11,7 +11,7 @@ class Stock(Base, DictBase):
     """stock table"""
     __tablename__ = 'stock'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(String(64), primary_key=True)
     code = Column(Text, nullable=True)
     name = Column(Text, nullable=True)
     trade_date = Column(Text, nullable=True)

@@ -30,7 +30,7 @@ def initialize_middleware():
 
 def initialize_router():
     from eagle.apps import stock
-    app.include_router(stock.router)
+    app.include_router(stock.router, prefix="/api/v1")
 
 
 def initialize_applications():

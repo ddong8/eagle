@@ -23,8 +23,10 @@ APPS = [
     'eagle.apps.traffic',
 ]
 
+CONN_STR = "postgresql+psycopg2://postgres:123456@global.ihasy.com/ork"
+
 DB_CONFIG = {
-    "connection": "postgresql+psycopg2://postgres:123456@global.ihasy.com/ork",
+    "connection": CONN_STR,
     "pool_size": 3,
     "pool_recycle": 3600,
     "pool_timeout": 5,
@@ -41,7 +43,7 @@ LOGURU_CONFIG = {
             "<cyan>{module}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>"
         },
         {
-            "sink": "eagle_api.log",
+            "sink": "./logs/eagle_api.log",
             "level": logging.INFO,
             "rotation": "10 MB",
             "retention": "1 week",
@@ -49,7 +51,7 @@ LOGURU_CONFIG = {
             "format": "{time:YYYY-mm-dd HH:mm:ss.SSS} | {thread.name} | {level} | {module} : {function}:{line} -  {message}"
         },
         {
-            "sink": "eagle_api_error.log",
+            "sink": "./logs/eagle_api_error.log",
             "serialize": True,
             "level": logging.ERROR,
             "retention": "1 week",
