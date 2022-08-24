@@ -10,8 +10,7 @@
 from eagle.workers.stock import tasks
 from fastapi import APIRouter
 
-from .controller import realtime_data, lhb_data
-from .resource import Stock
+from .controller import lhb_data, realtime_data
 
 router = APIRouter(
     prefix="/stock",

@@ -10,7 +10,6 @@
 import json
 from uuid import uuid4
 
-import pandas as pd
 import requests
 
 
