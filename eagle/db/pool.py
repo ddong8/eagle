@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """
 本模块统一数据库连接池对象
 
@@ -6,6 +7,7 @@
 @File    : crud.py
 @Time    : 08/10/2021 11:24 AM
 """
+
 
 import threading
 

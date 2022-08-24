@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """
 本模块提供基础请求处理器
 
@@ -46,7 +47,8 @@ class BaseHandler(Request):
     @staticmethod
     def _validate_data(req, data):
         if not data:
-            raise exception.BodyParseError(msg=_('empty request body, a valid json document is required.'))
+            raise exception.BodyParseError(
+                msg=_('empty request body, a valid json document is required.'))
         try:
             body = data.decode('utf-8')
             logger.debug(f"request body: {body}")

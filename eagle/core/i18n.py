@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """
 本模块提供i18n国际化翻译
 
@@ -6,6 +7,7 @@
 @File    : i18n.py
 @Time    : 08/10/2021 11:24 AM
 """
+
 
 import gettext
 
@@ -36,4 +38,3 @@ class Translator():
 
 
 _ = Translator()
-

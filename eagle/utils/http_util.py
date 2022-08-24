@@ -6,9 +6,8 @@ import functools
 import logging
 
 import requests
-
-# from talos.core.i18n import _
 from eagle.core import exception
+
 
 LOG = logging.getLogger(__name__)
 

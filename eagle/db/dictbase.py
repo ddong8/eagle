@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """
 本模块提供数据库模型字段遍历功能，以此为基础可以将实例转换为字典
 
@@ -6,6 +7,7 @@
 @File    : dictbase.py
 @Time    : 08/10/2021 11:24 AM
 """
+
 
 import six
 from sqlalchemy.orm import RelationshipProperty, object_mapper
@@ -199,4 +201,3 @@ class DictBase(object):
             else:
                 d[attr] = value
         return d
-

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """
 本模块提供异常信息封装
 
@@ -6,6 +7,7 @@
 @File    : handler.py
 @Time    : 08/24/2022 11:14
 """
+
 
 from __future__ import absolute_import
 

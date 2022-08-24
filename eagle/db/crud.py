@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """
 本模块提供DB的CRUD封装
 
@@ -6,6 +7,7 @@
 @File    : crud.py
 @Time    : 08/10/2021 11:24 AM
 """
+
 
 import copy
 import datetime
@@ -328,7 +330,8 @@ class ResourceBase(object):
         """
         with self.get_session() as session:
             try:
-                query = self._get_query(session, orders=orders, filters=filters)
+                query = self._get_query(
+                    session, orders=orders, filters=filters)
                 record = query.first()
                 if record:
                     record.update(resource)
@@ -372,4 +375,3 @@ class ResourceBase(object):
             except sqlalchemy.exc.SQLAlchemyError as e:
                 logger.error(e)
                 raise exception.DBError(msg=_('unknown db error'))
-

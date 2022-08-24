@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """
 本模块提供loguru日志处理
 
@@ -6,6 +7,7 @@
 @File    : logger.py
 @Time    : 08/24/2022 11:14
 """
+
 
 import logging
 from types import FrameType

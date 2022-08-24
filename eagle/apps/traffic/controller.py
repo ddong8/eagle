@@ -6,6 +6,7 @@
 # Do have a faith in what you're doing.
 # Make your life a story worth telling.
 
+
 from eagle.core.base import CollectionView
 from eagle.core.base import ItemView
 

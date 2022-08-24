@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """
 本模块提供各类常用工具函数集合
 
@@ -6,6 +7,7 @@
 @File    : utils.py
 @Time    : 08/10/2021 11:24 AM
 """
+
 
 import calendar
 import collections
@@ -531,4 +533,3 @@ def get_item(data, expr, delimiter='.', default=None):
     if value == VALUE_NOT_EXIST:
         value = default
     return value
-
