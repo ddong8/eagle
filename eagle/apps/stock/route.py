@@ -10,6 +10,7 @@
 from eagle.workers.stock import tasks
 from fastapi import APIRouter
 
+from .controller import realtime_data, lhb_data
 from .resource import Stock
 
 router = APIRouter(
@@ -17,10 +18,16 @@ router = APIRouter(
 )
 
 
+@router.get("/get_realtime_data/{stock_code}")
+async def get_realtime_data(stock_code: str):
+    data = realtime_data(stock_code)
+    return {"data": data}
+
+
 @router.get("/get_lhb_data/{date_str}")
 async def get_stock_data(date_str: str):
-    stock_data = Stock().list(filters={'trade_date': date_str})
-    return {"data": stock_data}
+    data = lhb_data(date_str)
+    return {"data": data}
 
 
 @router.put("/sync_lhb_data/{date_str}")
