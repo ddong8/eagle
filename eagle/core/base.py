@@ -1,10 +1,11 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 08/23/2022 15:14
-# @File    : base.py
-# @Author  : donghaixing
-# Do have a faith in what you're doing.
-# Make your life a story worth telling.
+"""
+本模块提供基础请求处理器
+
+@Author  : donghaixing
+@File    : handler.py
+@Time    : 08/24/2022 11:14
+"""
 
 
 import fnmatch

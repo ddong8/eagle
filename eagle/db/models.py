@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+"""
+本模块提供orm模型类
+
+@Author  : donghaixing
+@File    : handler.py
+@Time    : 08/24/2022 11:14
+"""
+
 from sqlalchemy import DECIMAL, Column, Integer, String, Text
 from sqlalchemy.ext.declarative import declarative_base
 

@@ -1,10 +1,11 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 08/23/2022 14:13
-# @File    : handler.py
-# @Author  : donghaixing
-# Do have a faith in what you're doing.
-# Make your life a story worth telling.
+"""
+本模块提供集合控制器
+
+@Author  : donghaixing
+@File    : handler.py
+@Time    : 08/24/2022 11:14
+"""
 
 
 import copy

@@ -1,14 +1,10 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 2019/5/2 22:13
-# @File    : pool.py
-# @Author  : donghaixing
-# Do have a faith in what you're doing.
-# Make your life a story worth telling.
-
 """
 本模块统一数据库连接池对象
 
+@Author  : donghaixing
+@File    : crud.py
+@Time    : 08/10/2021 11:24 AM
 """
 
 import threading
