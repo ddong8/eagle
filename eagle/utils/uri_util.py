@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import re
 
 # NOTE(kgriffs): Published method; take care to avoid breaking changes.

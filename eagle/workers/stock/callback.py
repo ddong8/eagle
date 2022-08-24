@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from eagle.common import async_helper
 # data是强制参数，task_id为url强制参数(如果url没有参数，则函数也无需task_id)
 

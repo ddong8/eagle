@@ -1,4 +1,4 @@
-# coding=utf-8
+# -*- coding: utf-8 -*-
 """
 包装了celery，方便进行远程调用，回调
 依赖：
