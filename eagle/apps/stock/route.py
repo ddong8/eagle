@@ -7,10 +7,12 @@
 # Make your life a story worth telling.
 
 
+from datetime import date
 from eagle.workers.stock import tasks
 from fastapi import APIRouter
 
 from .controller import lhb_data, realtime_data
+from .resource import Stock
 
 router = APIRouter(
     prefix="/stock",
@@ -24,8 +26,14 @@ async def get_realtime_data(stock_code: str):
 
 
 @router.get("/get_lhb_data/{date_str}")
-async def get_stock_data(date_str: str):
+async def get_lhb_data(date_str: str):
     data = lhb_data(date_str)
+    return {"data": data}
+
+
+@router.get("/get_lhb_datas/")
+async def get_lhb_datas(startDate: str = date.today().isoformat(), endDate: str = date.today().isoformat()):
+    data = Stock().filter({"trade_date": startDate})
     return {"data": data}
 
 
