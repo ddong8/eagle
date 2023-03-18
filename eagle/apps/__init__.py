@@ -5,3 +5,7 @@
 # @Author  : donghaixing
 # Do have a faith in what you're doing.
 # Make your life a story worth telling.
+
+from fastapi import FastAPI
+
+app = FastAPI()

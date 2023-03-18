@@ -8,11 +8,10 @@
 
 
 import uvicorn
+
+from eagle.apps import app, chat, stock
 from eagle.core.logger import init_logger
 from eagle.etc import settings
-from fastapi import FastAPI
-
-app = FastAPI()
 
 
 def initialize_logger():
@@ -29,7 +28,7 @@ def initialize_middleware():
 
 
 def initialize_router():
-    from eagle.apps import stock
+    app.include_router(chat.router, prefix="/api/v1")
     app.include_router(stock.router, prefix="/api/v1")
 
 

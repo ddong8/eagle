@@ -1,9 +1,8 @@
-falcon
 celery[redis]
 flower
 pandas
 loguru
 requests
-psycopg2
+psycopg2-binary
 sqlalchemy
 fastapi[all]

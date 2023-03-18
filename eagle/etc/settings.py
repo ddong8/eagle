@@ -7,6 +7,8 @@
 # Make your life a story worth telling.
 
 
+import os
+import json
 import logging
 import sys
 
@@ -95,3 +97,6 @@ CELERY_WORKER = {
         "allow_hosts": ["eagle_redis", "eagle_web"]
     }
 }
+
+COOKIES = json.load(
+    open(os.path.join(os.path.dirname(__file__), 'cookie.json')))
