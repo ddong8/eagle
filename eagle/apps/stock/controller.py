@@ -54,3 +54,49 @@ def lhb_data(date_str):
             'explanation': stock['EXPLANATION']
         })
     return data_list
+
+
+def get_stock():
+    stock_code = 'AG0'
+    headers = {"Referer": "https://finance.sina.com.cn"}
+    url = f'http://hq.sinajs.cn/list={stock_code}'
+    ret = requests.get(url, headers=headers)
+    resp_data = ret.text
+    print(resp_data)
+    start = resp_data.find('"') + 1
+    end = resp_data.rfind('"') - 1
+    data_list = []
+    if end > start:
+        data_str = resp_data[start:end]
+        data_list = data_str.split(",")
+    send_request(data_list)
+
+
+def send_request(data):
+    # push
+    # POST http://127.0.0.1:8080/push
+
+    try:
+        response = requests.post(
+            url="https://api.day.app/push",
+            headers={
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            data=json.dumps({
+                "body": str(data),
+                "device_key": "StHezvE2w77GLuscNKRw75",
+                "title": "bleem",
+                "category": "myNotificationCategory",
+                "sound": "minuet.caf",
+                "badge": 1,
+                "icon": "https://day.app/assets/images/avatar.jpg",
+                "group": "test",
+                "url": "https://mritd.com"
+            })
+        )
+        print('Response HTTP Status Code: {status_code}'.format(
+            status_code=response.status_code))
+        print('Response HTTP Response Body: {content}'.format(
+            content=response.content))
+    except requests.exceptions.RequestException:
+        print('HTTP Request failed')

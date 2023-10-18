@@ -83,6 +83,11 @@ CELERY = {
                             "routing_key": "eagle"}
     },
     "beat_schedule": {
+        'add-every-30-seconds': {
+            'task': 'eagle.workers.stock.tasks.monitor',
+            'schedule': 30,
+            'args': (16, 16),
+        },
         "add-every-workday-afternoon": {
             "task": "eagle.workers.stock.tasks.add",
             "schedule": crontab(hour=18, minute=0, day_of_week='mon,tue,wed,thu,fri'),
