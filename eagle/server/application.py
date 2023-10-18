@@ -9,7 +9,7 @@
 
 import uvicorn
 
-from eagle.apps import app, chat, stock
+from eagle.apps import app, stock
 from eagle.core.logger import init_logger
 from eagle.etc import settings
 
@@ -28,7 +28,6 @@ def initialize_middleware():
 
 
 def initialize_router():
-    app.include_router(chat.router, prefix="/api/v1")
     app.include_router(stock.router, prefix="/api/v1")
 
 
