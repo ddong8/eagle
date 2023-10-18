@@ -6,13 +6,13 @@ import json
 
 import pandas as pd
 from eagle.apps.stock.controller import lhb_data
-from eagle.common import async_helper, celery
+from eagle.common import async_helper, celery_app
 from eagle.etc.settings import CONN_STR
 from eagle.workers.stock import callback
 from sqlalchemy import create_engine
 
 
-@celery.app.task
+@celery_app.app.task
 def add(task_id, x, y):
     # task_id, x, y均为函数自定义参数，本次我们需要做回调演示，因此我们需要task_id异步任务id，以及加法的x和y
     result = x + y
@@ -33,7 +33,7 @@ def add(task_id, x, y):
     return result
 
 
-@celery.app.task
+@celery_app.app.task
 def other_task(task_id, result):
     # task_id, result均为函数自定义参数，本次我们需要做通知演示，因此我们需要task_id原始异步任务id，以及加法的result
     pass

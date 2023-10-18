@@ -6,7 +6,7 @@ import ipaddress
 import logging
 import uuid
 
-from eagle.common import celery
+from eagle.common import celery_app
 from eagle.core import exception
 from eagle.etc import settings
 from eagle.utils import http_util, uri_util
@@ -219,6 +219,6 @@ rpc_call = send_callback
 
 
 def send_task(name, kwargs, **task_kwargs):
-    return celery.app.send_task(name,
+    return celery_app.app.send_task(name,
                                 kwargs=kwargs,
                                 **task_kwargs)

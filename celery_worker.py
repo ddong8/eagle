@@ -7,6 +7,6 @@
 # Make your life a story worth telling.
 
 
-from eagle.common import celery
+from eagle.common import celery_app
 
-app = celery.app
+app = celery_app.app
