@@ -86,7 +86,7 @@ CELERY = {
         'add-every-30-seconds': {
             'task': 'eagle.workers.stock.tasks.monitor',
             'schedule': 30,
-            'args': (16, 16),
+            'args': ("id1", 16, 16),
         },
         "add-every-workday-afternoon": {
             "task": "eagle.workers.stock.tasks.add",
